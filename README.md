@@ -5,8 +5,6 @@
    и доступами
 3) [Pint](https://laravel.com/docs/10.x/pint) - стилизация кода
 4) [Sanctum](https://laravel.com/docs/10.x/sanctum) - система аутентификации для api приложений
-## The git branching model in a project
-
 
 
 ## Run project locally
