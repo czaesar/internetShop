@@ -7,12 +7,7 @@
 4) [Sanctum](https://laravel.com/docs/10.x/sanctum) - система аутентификации для api приложений
 ## The git branching model in a project
 
-Модель ветвления выбрана из этой [статьи](https://habr.com/ru/articles/106912/). Есть три типа
-веток: `main`, `dev`, `feature/`
 
-1) Из ветки `dev` создаем новую ветку `feature/task-example`
-2) После добавления коммитов в ветке `feature/task-example` мержим ее в ветку `dev`
-3) После мержим `dev` в `master`
 
 ## Run project locally
 
