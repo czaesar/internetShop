@@ -15,6 +15,7 @@ class UserAdminSeeder extends Seeder
     {
         $adminRole = 'admin';
         $superAdminRole = 'super-admin';
+        $userRole = 'user';
 
         $userAdmin = User::firstOrCreate([
             'name' => 'admin',
@@ -31,5 +32,13 @@ class UserAdminSeeder extends Seeder
         ]);
 
         $userSuperAdmin->syncRoles([$superAdminRole]);
+
+        $user = User::firstOrCreate([
+            'name' => 'user',
+            'email' => 'user@mail.ru',
+            'password' => Hash::make('Password1'),
+        ]);
+
+        $user->syncRoles([$userRole]);
     }
 }
