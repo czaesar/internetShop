@@ -26,7 +26,7 @@ class AuthController extends Controller
 
         return response()->json(
             [
-                'token' => $user->createToken('login-token')->plainTextToken
+                'token' => $user->createToken('login-token')->plainTextToken,
             ],
             Response::HTTP_OK
         );
