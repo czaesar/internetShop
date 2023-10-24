@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Admin\User\CreateUserRequest;
 use App\Http\Requests\Api\Admin\User\GetUserRequest;
 use App\Http\Requests\Api\Admin\User\UpdateUserRequest;
-use App\Http\Resources\Api\Admin\Category\CategoryResource;
 use App\Http\Resources\Api\Admin\User\UserResource;
 use App\Services\AdminCheckService;
 use App\Services\Api\Admin\User\UserService;
@@ -18,7 +17,8 @@ class UserController extends Controller
     public function __construct(
         protected UserService $userService,
         protected AdminCheckService $adminCheckService
-    ){}
+    ) {
+    }
 
     /**
      * Display a listing of the resource.
@@ -63,7 +63,7 @@ class UserController extends Controller
     {
         $this->adminCheckService->checkRole($request);
         $data = $request->validated();
-        $user = $this->userService->update($data,$id);
+        $user = $this->userService->update($data, $id);
 
         return new UserResource($user);
     }

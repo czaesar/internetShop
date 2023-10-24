@@ -14,9 +14,10 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, HasRoles, Notifiable;
 
     const GENDER_MALE = 1;
+
     const GENDER_FEMALE = 2;
 
-    static function getGenders()
+    public static function getGenders()
     {
         return [
             self::GENDER_MALE => 'Мужской',
@@ -43,7 +44,7 @@ class User extends Authenticatable
         'address',
         'email',
         'gender',
-        'password'
+        'password',
     ];
 
     /**

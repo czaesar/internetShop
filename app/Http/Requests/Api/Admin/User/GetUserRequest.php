@@ -27,7 +27,7 @@ class GetUserRequest extends FormRequest
     {
         return [
             'page' => ['int'],
-            'perPage' => ['int', Rule::in([5,10,15])],
+            'perPage' => ['int', Rule::in([5, 10, 15])],
         ];
     }
 
