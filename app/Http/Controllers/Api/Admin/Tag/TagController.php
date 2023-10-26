@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\Admin\Tag;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Admin\Tag\CreateTagRequest;
 use App\Http\Requests\Api\Admin\Tag\UpdateTagRequest;
-use App\Http\Resources\TagResource;
+use App\Http\Resources\Api\Admin\Tag\TagResource;
 use App\Services\AdminCheckService;
 use App\Services\Api\Admin\Tag\TagService;
 use Illuminate\Http\Request;
