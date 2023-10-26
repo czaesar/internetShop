@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Api\Admin\Category;
+namespace App\Http\Requests\Api\Admin\Tag;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Symfony\Component\HttpFoundation\Response;
 
-class CreateCategoryRequest extends FormRequest
+class CreateTagRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

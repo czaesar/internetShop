@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Admin\Category\CategoryController;
+use App\Http\Controllers\Api\Admin\Tag\TagController;
 use App\Http\Controllers\Api\Admin\User\UserController;
 use App\Http\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -27,5 +28,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
             Route::apiResource('category', CategoryController::class);
         });
         Route::apiResource('user', UserController::class);
+        Route::apiResource('tag', TagController::class);
     });
 });
