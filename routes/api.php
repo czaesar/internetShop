@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\Admin\Color\ColorController;
 use App\Http\Controllers\Api\Admin\Tag\TagController;
 use App\Http\Controllers\Api\Admin\User\UserController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Middleware\CheckAdmin;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,18 +26,19 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::group(['prefix' => 'admin'], function () {
-        Route::group(['prefix' => 'categories'], function () {
-            Route::apiResource('category', CategoryController::class);
+        Route::middleware('check.admin')->group(function (){
+            Route::group(['prefix' => 'categories'], function () {
+                Route::apiResource('category', CategoryController::class);
+            });
+            Route::group(['prefix' => 'users'], function () {
+                Route::apiResource('user', UserController::class);
+            });
+            Route::group(['prefix' => 'tags'], function () {
+                Route::apiResource('tag', TagController::class);
+            });
+            Route::group(['prefix' => 'colors'], function () {
+                Route::apiResource('color', ColorController::class);
+            });
         });
-        Route::group(['prefix' => 'users'], function () {
-            Route::apiResource('user', UserController::class);
-        });
-        Route::group(['prefix' => 'tags'], function () {
-            Route::apiResource('tag', TagController::class);
-        });
-        Route::group(['prefix' => 'colors'], function () {
-            Route::apiResource('color', ColorController::class);
-        });
-
     });
 });

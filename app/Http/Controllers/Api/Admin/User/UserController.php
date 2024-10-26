@@ -25,7 +25,6 @@ class UserController extends Controller
      */
     public function index(GetUserRequest $request): ResourceCollection
     {
-        $this->adminCheckService->checkRole($request);
         $data = $request->validated();
         $user = $this->userService->index($data);
 
@@ -38,7 +37,6 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request): UserResource
     {
-        $this->adminCheckService->checkRole($request);
         $data = $request->validated();
         $user = $this->userService->store($data);
 
@@ -48,9 +46,8 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request, string $id): UserResource
+    public function show(string $id): UserResource
     {
-        $this->adminCheckService->checkRole($request);
         $user = $this->userService->show($id);
 
         return new UserResource($user);
@@ -61,7 +58,6 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, string $id): UserResource
     {
-        $this->adminCheckService->checkRole($request);
         $data = $request->validated();
         $user = $this->userService->update($data, $id);
 
@@ -71,9 +67,8 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, string $id): UserResource
+    public function destroy(string $id): UserResource
     {
-        $this->adminCheckService->checkRole($request);
         $user = $this->userService->destroy($id);
 
         return new UserResource($user);

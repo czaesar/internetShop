@@ -3,32 +3,33 @@
 namespace App\Services\Api\Admin\User;
 
 use App\Models\User;
+use App\Repositories\Contracts\RepositoryInterface;
+use App\Repositories\EloquentRepository;
+use App\Services\Api\AbstractService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Hash;
 
-class UserService
+class UserService extends AbstractService
 {
+
+    public function __construct(RepositoryInterface $repository)
+    {
+        parent::__construct($repository);
+    }
     public function index($data): LengthAwarePaginator
     {
-        $user = User::query()->paginate($data['perPage']);
-
-        return $user;
+        return $this->repository->indexListPaginate($data);
     }
 
     public function store(array $data): Model
     {
-        $data['password'] = Hash::make($data['password']);
-        $user = User::query()->create($data);
-
-        return $user;
+        return parent::store($data);
     }
 
     public function show($id): Model
     {
-        $user = User::query()->findOrFail($id);
-
-        return $user;
+        return parent::show($id);
     }
 
     public function update($data, $id): Model
