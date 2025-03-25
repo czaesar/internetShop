@@ -6,14 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Admin\Color\CreateColorRequest;
 use App\Http\Requests\Api\Admin\Color\UpdateColorRequest;
 use App\Http\Resources\Api\Admin\Color\ColorResource;
-use App\Services\AdminCheckService;
 use App\Services\Api\Admin\Color\ColorService;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class ColorController extends Controller
 {
     public function __construct(
-        protected AdminCheckService $adminCheckService,
         protected ColorService $colorService
     ) {
     }
@@ -23,7 +21,7 @@ class ColorController extends Controller
      */
     public function index(): ResourceCollection
     {
-        $color = $this->colorService->index();
+        $color = $this->colorService->indexList();
 
         return ColorResource::collection($color);
     }

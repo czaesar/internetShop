@@ -6,14 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Admin\Tag\CreateTagRequest;
 use App\Http\Requests\Api\Admin\Tag\UpdateTagRequest;
 use App\Http\Resources\Api\Admin\Tag\TagResource;
-use App\Services\AdminCheckService;
 use App\Services\Api\Admin\Tag\TagService;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class TagController extends Controller
 {
     public function __construct(
-        protected AdminCheckService $adminCheckService,
         protected TagService $tagService,
     ) {
     }
@@ -23,7 +21,7 @@ class TagController extends Controller
      */
     public function index(): ResourceCollection
     {
-        $tag = $this->tagService->index();
+        $tag = $this->tagService->indexList();
 
         return TagResource::collection($tag);
     }

@@ -6,15 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Admin\Category\CreateCategoryRequest;
 use App\Http\Requests\Api\Admin\Category\UpdateCategoryRequest;
 use App\Http\Resources\Api\Admin\Category\CategoryResource;
-use App\Services\AdminCheckService;
 use App\Services\Api\Admin\Category\CategoryService;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class CategoryController extends Controller
 {
     public function __construct(
-        protected AdminCheckService $adminCheckService,
         protected CategoryService $categoryService
     ) {
     }
@@ -40,7 +37,7 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request, string $id): CategoryResource
+    public function show(string $id): CategoryResource
     {
         $category = $this->categoryService->show($id);
 
@@ -62,7 +59,7 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, string $id): CategoryResource
+    public function destroy(string $id): CategoryResource
     {
         $category = $this->categoryService->destroy($id);
 
