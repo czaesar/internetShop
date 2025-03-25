@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api\Admin\Category;
 
 use App\Http\Controllers\Controller;
@@ -37,7 +39,7 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id): CategoryResource
+    public function show(int $id): CategoryResource
     {
         $category = $this->categoryService->show($id);
 
@@ -47,7 +49,7 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoryRequest $request, string $id): CategoryResource
+    public function update(UpdateCategoryRequest $request, int $id): CategoryResource
     {
         $data = $request->validated();
 

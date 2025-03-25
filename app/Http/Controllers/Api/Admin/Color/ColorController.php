@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api\Admin\Color;
 
 use App\Http\Controllers\Controller;
@@ -40,7 +42,7 @@ class ColorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id): ColorResource
+    public function show(int $id): ColorResource
     {
         $color = $this->colorService->show($id);
 
@@ -51,7 +53,7 @@ class ColorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateColorRequest $request, string $id): ColorResource
+    public function update(UpdateColorRequest $request, int $id): ColorResource
     {
         $data = $request->validated();
         $color = $this->colorService->update($data, $id);

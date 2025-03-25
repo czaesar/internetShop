@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api\Admin\Tag;
 
 use App\Http\Controllers\Controller;
@@ -40,7 +42,7 @@ class TagController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id): TagResource
+    public function show(int $id): TagResource
     {
         $tag = $this->tagService->show($id);
 
@@ -50,7 +52,7 @@ class TagController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTagRequest $request, string $id): TagResource
+    public function update(UpdateTagRequest $request, int $id): TagResource
     {
         $data = $request->validated();
         $tag = $this->tagService->update($data, $id);
@@ -61,7 +63,7 @@ class TagController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): TagResource
+    public function destroy(int $id): TagResource
     {
         $tag = $this->tagService->destroy($id);
 

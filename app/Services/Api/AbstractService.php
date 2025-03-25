@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services\Api;
 
 use App\Repositories\Contracts\RepositoryInterface;
@@ -41,7 +43,7 @@ class AbstractService
         return $this->repository->show($id);
     }
 
-    public function destroy($id)
+    public function destroy(int $id): Model
     {
         return $this->repository->destroy($id);
     }
