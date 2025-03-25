@@ -3,45 +3,15 @@
 namespace App\Services\Api\Admin\Tag;
 
 use App\Models\Tag;
+use App\Repositories\EloquentRepository;
+use App\Services\Api\AbstractService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-class TagService
+class TagService extends AbstractService
 {
-    public function index(): Collection
+    public function __construct()
     {
-        $tag = Tag::query()->get();
-
-        return $tag;
-    }
-
-    public function store(array $data): Model
-    {
-        $tag = Tag::query()->create($data);
-
-        return $tag;
-    }
-
-    public function show($id): Model
-    {
-        $tag = Tag::query()->findOrFail($id);
-
-        return $tag;
-    }
-
-    public function update($data, $id): Model
-    {
-        $tag = Tag::query()->findOrFail($id);
-        $tag->update($data);
-
-        return $tag;
-    }
-
-    public function destroy($id): Model
-    {
-        $tag = Tag::query()->findOrFail($id);
-        $tag->delete();
-
-        return $tag;
+        parent::__construct(new EloquentRepository(new Tag()));
     }
 }

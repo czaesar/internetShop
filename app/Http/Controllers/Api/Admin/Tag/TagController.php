@@ -8,7 +8,6 @@ use App\Http\Requests\Api\Admin\Tag\UpdateTagRequest;
 use App\Http\Resources\Api\Admin\Tag\TagResource;
 use App\Services\AdminCheckService;
 use App\Services\Api\Admin\Tag\TagService;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class TagController extends Controller
@@ -22,9 +21,8 @@ class TagController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request): ResourceCollection
+    public function index(): ResourceCollection
     {
-        $this->adminCheckService->checkRole($request);
         $tag = $this->tagService->index();
 
         return TagResource::collection($tag);
@@ -35,7 +33,6 @@ class TagController extends Controller
      */
     public function store(CreateTagRequest $request): TagResource
     {
-        $this->adminCheckService->checkRole($request);
         $data = $request->validated();
         $tag = $this->tagService->store($data);
 
@@ -45,9 +42,8 @@ class TagController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request, string $id): TagResource
+    public function show(string $id): TagResource
     {
-        $this->adminCheckService->checkRole($request);
         $tag = $this->tagService->show($id);
 
         return new TagResource($tag);
@@ -58,7 +54,6 @@ class TagController extends Controller
      */
     public function update(UpdateTagRequest $request, string $id): TagResource
     {
-        $this->adminCheckService->checkRole($request);
         $data = $request->validated();
         $tag = $this->tagService->update($data, $id);
 
@@ -68,9 +63,8 @@ class TagController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, string $id): TagResource
+    public function destroy(string $id): TagResource
     {
-        $this->adminCheckService->checkRole($request);
         $tag = $this->tagService->destroy($id);
 
         return new TagResource($tag);

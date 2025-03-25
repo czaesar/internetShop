@@ -3,45 +3,16 @@
 namespace App\Services\Api\Admin\Category;
 
 use App\Models\Category;
+use App\Repositories\Contracts\RepositoryInterface;
+use App\Repositories\EloquentRepository;
+use App\Services\Api\AbstractService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-class CategoryService
+class CategoryService extends AbstractService
 {
-    public function index(): Collection
+    public function __construct()
     {
-        $category = Category::query()->get();
-
-        return $category;
-    }
-
-    public function store(array $data): Model
-    {
-        $category = Category::query()->create($data);
-
-        return $category;
-    }
-
-    public function show($id): Model
-    {
-        $category = Category::query()->findOrFail($id);
-
-        return $category;
-    }
-
-    public function update($data, $id): Model
-    {
-        $category = Category::query()->findOrFail($id);
-        $category->update($data);
-
-        return $category;
-    }
-
-    public function destroy($id): Model
-    {
-        $category = Category::query()->findOrFail($id);
-        $category->delete();
-
-        return $category;
+        parent::__construct(new EloquentRepository(new Category()));
     }
 }

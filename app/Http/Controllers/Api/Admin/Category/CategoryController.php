@@ -19,10 +19,9 @@ class CategoryController extends Controller
     ) {
     }
 
-    public function index(Request $request): ResourceCollection
+    public function index(): ResourceCollection
     {
-        $this->adminCheckService->checkRole($request);
-        $category = $this->categoryService->index();
+        $category = $this->categoryService->indexList();
 
         return CategoryResource::collection($category);
     }
@@ -32,7 +31,6 @@ class CategoryController extends Controller
      */
     public function store(CreateCategoryRequest $request): CategoryResource
     {
-        $this->adminCheckService->checkRole($request);
         $data = $request->validated();
         $category = $this->categoryService->store($data);
 
@@ -44,7 +42,6 @@ class CategoryController extends Controller
      */
     public function show(Request $request, string $id): CategoryResource
     {
-        $this->adminCheckService->checkRole($request);
         $category = $this->categoryService->show($id);
 
         return new CategoryResource($category);
@@ -55,7 +52,6 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, string $id): CategoryResource
     {
-        $this->adminCheckService->checkRole($request);
         $data = $request->validated();
 
         $category = $this->categoryService->update($data, $id);
@@ -68,7 +64,6 @@ class CategoryController extends Controller
      */
     public function destroy(Request $request, string $id): CategoryResource
     {
-        $this->adminCheckService->checkRole($request);
         $category = $this->categoryService->destroy($id);
 
         return new CategoryResource($category);

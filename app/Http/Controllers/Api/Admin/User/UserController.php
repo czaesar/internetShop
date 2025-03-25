@@ -7,16 +7,13 @@ use App\Http\Requests\Api\Admin\User\CreateUserRequest;
 use App\Http\Requests\Api\Admin\User\GetUserRequest;
 use App\Http\Requests\Api\Admin\User\UpdateUserRequest;
 use App\Http\Resources\Api\Admin\User\UserResource;
-use App\Services\AdminCheckService;
 use App\Services\Api\Admin\User\UserService;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class UserController extends Controller
 {
     public function __construct(
-        protected UserService $userService,
-        protected AdminCheckService $adminCheckService
+        protected UserService $userService
     ) {
     }
 
@@ -26,10 +23,9 @@ class UserController extends Controller
     public function index(GetUserRequest $request): ResourceCollection
     {
         $data = $request->validated();
-        $user = $this->userService->index($data);
+        $user = $this->userService->indexListPaginate($data);
 
         return UserResource::collection($user);
-
     }
 
     /**

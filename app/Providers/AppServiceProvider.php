@@ -14,9 +14,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(RepositoryInterface::class, function ($app) {
-            return new EloquentRepository(new User());
-        });
     }
 
     /**

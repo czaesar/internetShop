@@ -6,46 +6,23 @@ use App\Models\User;
 use App\Repositories\Contracts\RepositoryInterface;
 use App\Repositories\EloquentRepository;
 use App\Services\Api\AbstractService;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\Model;
 
 class UserService extends AbstractService
 {
 
-    public function __construct(RepositoryInterface $repository)
+    public function __construct()
     {
-        parent::__construct($repository);
-    }
-    public function index($data): LengthAwarePaginator
-    {
-        return $this->repository->indexListPaginate($data);
+        parent::__construct(new EloquentRepository(new User()));
     }
 
-    public function store(array $data): Model
+    public function update(array $data, int $id): Model
     {
-        return parent::store($data);
-    }
+        if (isset($data['password'])) {
+            $data['password'] = Hash::make($data['password']);
+        }
 
-    public function show($id): Model
-    {
-        return parent::show($id);
-    }
-
-    public function update($data, $id): Model
-    {
-        $data['password'] = Hash::make($data['password']);
-        $user = User::query()->findOrFail($id);
-        $user->update($data);
-
-        return $user;
-    }
-
-    public function destroy($id): Model
-    {
-        $user = User::query()->findOrFail($id);
-        $user->delete();
-
-        return $user;
+        return parent::update($data, $id);
     }
 }
