@@ -6,13 +6,13 @@ use App\Repositories\Contracts\RepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Hash;
 
 class EloquentRepository implements RepositoryInterface
 {
     public function __construct(
         protected Model $model,
-    ){}
+    ) {
+    }
 
     public function indexListPaginate(array $data): LengthAwarePaginator
     {

@@ -8,7 +8,6 @@ use App\Http\Requests\Api\Admin\Color\UpdateColorRequest;
 use App\Http\Resources\Api\Admin\Color\ColorResource;
 use App\Services\AdminCheckService;
 use App\Services\Api\Admin\Color\ColorService;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class ColorController extends Controller
@@ -22,9 +21,8 @@ class ColorController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request): ResourceCollection
+    public function index(): ResourceCollection
     {
-        $this->adminCheckService->checkRole($request);
         $color = $this->colorService->index();
 
         return ColorResource::collection($color);
@@ -35,7 +33,6 @@ class ColorController extends Controller
      */
     public function store(CreateColorRequest $request): ColorResource
     {
-        $this->adminCheckService->checkRole($request);
         $data = $request->validated();
         $color = $this->colorService->store($data);
 
@@ -45,9 +42,8 @@ class ColorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request, string $id): ColorResource
+    public function show(string $id): ColorResource
     {
-        $this->adminCheckService->checkRole($request);
         $color = $this->colorService->show($id);
 
         return new ColorResource($color);
@@ -59,7 +55,6 @@ class ColorController extends Controller
      */
     public function update(UpdateColorRequest $request, string $id): ColorResource
     {
-        $this->adminCheckService->checkRole($request);
         $data = $request->validated();
         $color = $this->colorService->update($data, $id);
 
@@ -69,9 +64,8 @@ class ColorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, string $id): ColorResource
+    public function destroy(string $id): ColorResource
     {
-        $this->adminCheckService->checkRole($request);
         $color = $this->colorService->destroy($id);
 
         return new ColorResource($color);

@@ -16,9 +16,10 @@ class CheckAdmin
     public function handle(Request $request, Closure $next): Response
     {
         $user = $request->user();
-        if(!$user->hasAnyRole(['super-admin', 'admin'])) {
+        if (! $user->hasAnyRole(['super-admin', 'admin'])) {
             return \response()->json(['error' => 'Access denied'], Response::HTTP_FORBIDDEN);
         }
+
         return $next($request);
     }
 }

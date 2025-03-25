@@ -3,45 +3,13 @@
 namespace App\Services\Api\Admin\Color;
 
 use App\Models\Color;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
+use App\Repositories\EloquentRepository;
+use App\Services\Api\AbstractService;
 
-class ColorService
+class ColorService extends AbstractService
 {
-    public function index(): Collection
+    public function __construct()
     {
-        $tag = Color::query()->get();
-
-        return $tag;
-    }
-
-    public function store(array $data): Model
-    {
-        $tag = Color::query()->create($data);
-
-        return $tag;
-    }
-
-    public function show($id): Model
-    {
-        $tag = Color::query()->findOrFail($id);
-
-        return $tag;
-    }
-
-    public function update($data, $id): Model
-    {
-        $tag = Color::query()->findOrFail($id);
-        $tag->update($data);
-
-        return $tag;
-    }
-
-    public function destroy($id): Model
-    {
-        $tag = Color::query()->findOrFail($id);
-        $tag->delete();
-
-        return $tag;
+        parent::__construct(new EloquentRepository(new Color()));
     }
 }

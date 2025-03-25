@@ -45,5 +45,4 @@ class AbstractService
     {
         return $this->repository->destroy($id);
     }
-
 }

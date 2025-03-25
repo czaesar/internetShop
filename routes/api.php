@@ -5,7 +5,6 @@ use App\Http\Controllers\Api\Admin\Color\ColorController;
 use App\Http\Controllers\Api\Admin\Tag\TagController;
 use App\Http\Controllers\Api\Admin\User\UserController;
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Middleware\CheckAdmin;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,7 +25,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::group(['prefix' => 'admin'], function () {
-        Route::middleware('check.admin')->group(function (){
+        Route::middleware('check.admin')->group(function () {
             Route::apiResource('category', CategoryController::class);
             Route::apiResource('user', UserController::class);
             Route::apiResource('tag', TagController::class);

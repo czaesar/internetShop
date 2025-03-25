@@ -17,7 +17,7 @@ class AuthController extends Controller
         $data = $request->validated();
         $user = User::where('email', $data['email'])->first();
 
-        if (!$user || !Hash::check($data['password'], $user->password)) {
+        if (! $user || ! Hash::check($data['password'], $user->password)) {
             return response()->json(['error' => 'credentials are wrong for login'], Response::HTTP_UNAUTHORIZED);
         }
 
@@ -25,7 +25,6 @@ class AuthController extends Controller
             'token' => $user->createToken('login-token')->plainTextToken,
         ], Response::HTTP_OK);
     }
-
 
     public function logout(Request $request): JsonResponse
     {
